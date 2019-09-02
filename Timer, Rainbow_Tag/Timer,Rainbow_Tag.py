@@ -9,6 +9,9 @@ import time
 import random
 import pygame
 import snaps
+#import pdb
+
+#pdb.set_trace()
 
 E_msg_time=2
 snaps.setup(title='Custom Timer')
@@ -55,7 +58,7 @@ while initialize_var:
             min_var=0;sec_var=int(time_array[0]);tot_time=sec_var
             if tot_time > 3600:
                 length_check=False
-            if sec_var > 60:
+            if sec_var >= 60:
                 format_check = True
             else:
                 format_check = False
@@ -69,16 +72,20 @@ while initialize_var:
                     break
             
         if len(time_array) == 2:
-            min_var=int(time_array[0])*60;sec_var=int(time_array[1]);tot_time=min_var+sec_var
+            check_opt=2
+            min_var=int(time_array[0]);sec_var=int(time_array[1]);tot_time=(min_var*60)+sec_var
             if tot_time > 3600:
                 length_check=False
-            if sec_var > 60:
+            if sec_var >= 60:
                 format_check = True
+            else:
+                format_check = False
             while format_check:
                 if sec_var >= 60:
                     sec_var=sec_var-60
                     min_var=min_var+1
-                    check_opt=2
+                else:
+                    break
 
         if length_check == False:
             snaps.display_message('Error\nOnly accepts time less than one hour', size=40)
@@ -95,5 +102,7 @@ while initialize_var:
             break
         if user_check == 'n':
             break
-
+#Enter_timer=True
+#while Enter_timer:
+    
 snaps.display_message('ta dah')
