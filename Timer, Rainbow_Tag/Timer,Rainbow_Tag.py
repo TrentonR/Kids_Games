@@ -22,7 +22,9 @@ initialize_var = True
 checker_var = True
 int_check=True
 input_validate=True
-    
+
+
+#rloop
 while initialize_var:
     
     while input_validate:
@@ -94,10 +96,10 @@ while initialize_var:
             time.sleep(E_msg_time)
         if length_check == True and check_opt == 1:
             user_check = snaps.get_string(str(sec_var)+'sec?\n(y/n)   ', cursor='_')
-            init_message=str(sec_var-20)
+            init_message=str(sec_var)
         if length_check == True and check_opt == 2:
             user_check = snaps.get_string(str(min_var)+'min'+str(sec_var)+'sec?\n(y/n)   ', cursor='_')
-            init_message=str(min_var)+'min'+str(sec_var-20)+'sec'
+            init_message=str(min_var)+'min'+str(sec_var)+'sec'
         if user_check != 'y' and user_check != 'n':
             continue
         if user_check == 'y':
@@ -107,20 +109,40 @@ while initialize_var:
             break
 Enter_timer=True
 stored_time=tot_time
-if tot_time>60:
-    tot_time=tot_time-60
-tot_time=tot_time-20
-snaps.display_message(init_message)
-time.sleep(tot_time)
-sound2.play()
-#while Enter_timer:
-snaps.display_message('ONE\nMINUTE')
-time.sleep(40)
-sound1.play()
-final_countdown=20# ;)
-for var_1 in range(0,20):
-    snaps.display_message(str(final_countdown))
-    final_countdown=final_countdown-1
+while Enter_timer:
+    if tot_time>60:
+        if tot_time>86:
+            tot_time=tot_time-60
+            min_warn=True
+        else:
+            min_warn=False
+            
+    else:
+        min_warn=False
+    tot_time=tot_time-26
+    snaps.display_message(init_message)
+    for var_2 in range(0,5):
+        inital_count=stored_time-(1+var_2)
+        time.sleep(1)
+        snaps.display_message(inital_count)
     time.sleep(1)
-    
-snaps.display_message('ta dah')
+    snaps.display_message('and so on...')
+    time.sleep(tot_time)
+    if min_warn:
+        sound2.play()
+    #while Enter_timer:
+        snaps.display_message('ONE\nMINUTE')
+        time.sleep(39)
+    sound1.play()
+    final_countdown=20# ;)
+    for var_1 in range(0,20):
+        snaps.display_message(str(final_countdown))
+        final_countdown=final_countdown-1
+        time.sleep(1)
+    sound2.play()
+    time.sleep(10)
+    run_again = snaps.get_string('Run timer again with same length\n(y/n)   ', cursor='_')
+    if run_again == 'n':
+        quit()
+    else:
+        continue
